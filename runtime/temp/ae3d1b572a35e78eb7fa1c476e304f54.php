@@ -1,0 +1,192 @@
+<?php /*a:1:{s:49:"D:\phpstudy_pro\project\auth\view\admin\shop.html";i:1603539712;}*/ ?>
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">控制面板</a>
+    <a><cite>账户升级</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">账户升级购买</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form layui-form-pane">
+                             <div class="layui-form-item">
+							 <select name="shop" id="shop" lay-verify="">
+							  <option value="">请选择购买类型</option>
+								<option value="vip">永久付费版权限（<?php echo config('web.vipmoney'); ?>元）</option>
+								<option value="pie">一个播放器配额（<?php echo config('web.piemoney'); ?>元）</option>
+							</select>
+                            </div>
+							<div class="layui-form-item">
+							  <label class="layui-form-label">支付方式：</label>
+							  <div class="layui-input-block">
+								<input type="radio" name="paytype" value="alipay" title="支付宝[推荐]" checked=""><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>支付宝[推荐]</div></div>
+								<input type="radio" name="paytype" value="wxpay" title="微信支付"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>微信支付</div></div>
+								<input type="radio" name="paytype" value="qqpay" title="QQ钱包"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>QQ钱包</div></div>
+							  </div>
+							</div>
+							<div class="layui-form-item">
+                                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="pay">立即购买
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="layui-collapse" lay-accordion="" style="margin-top:10px">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">购买记录 <span class="layui-badge">最近5次</span></h2>
+                        <div class="layui-colla-content layui-show" style="padding: 0;">
+                            <div class="layui-form">
+                                <table class="layui-table" lay-skin="nob" lay-size="sm" style="margin: 0;">
+                                    <thead>
+                                    <tr>
+                                        <th>状态</th>
+                                        <th>支付方式</th>
+                                        <th>购买类型</th>
+                                        <th>金额</th>
+                                        <th>下单时间</th>
+                                        <th>付款时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+									<?php if(is_array($pays) || $pays instanceof \think\Collection || $pays instanceof \think\Paginator): $i = 0; $__LIST__ = $pays;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+									<tr>
+                                        <td>
+										<?php if($vo['status'] == '0'): ?>
+										<span style="color:#999">未支付</span>
+										<?php else: ?>
+										<span style="color:#009688">已支付</span>
+										<?php endif; ?>
+										</td>
+                                        <td>
+										<?php switch($vo['type']): case "wxpay": ?>微信支付<?php break; case "alipay": ?>支付宝<?php break; case "qqpay": ?>QQ钱包<?php break; ?>
+										<?php endswitch; ?>
+										</td>
+                                        <td><?php echo htmlentities($vo['name']); ?></td>
+                                        <td>1.01元</td>
+                                        <td><?php echo htmlentities($vo['addtime']); ?></td>
+                                        <td><?php echo htmlentities($vo['endtime']); ?></td>
+                                    </tr>
+									<?php endforeach; endif; else: echo "" ;endif; ?>
+                                                                                                            </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+			 <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">免费版</div>
+                <div class="layui-card-body">
+                    <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                        <thead>
+                        <tr>
+                            <th>￥0/元</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><span class="first">适合：仅体验且不在意细节功能人群</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="second">优点：注册即可永久免费使用</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="third">缺点：功能被限制，不支持KSC歌词</span></td>
+                        </tr>
+						<tr>
+                            <td><span>播放器仅可添加一个站点授权</span></td>
+                        </tr>
+						<tr>
+                            <td><span>不可使用播放器换肤功能</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>不提供任何技术支持（仅交流群）</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+			<div class="layui-card">
+                <div class="layui-card-header">付费版</div>
+                <div class="layui-card-body">
+                    <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                        <thead>
+                        <tr>
+                            <th>￥<?php echo config('web.vipmoney'); ?>/元</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><span class="first">适合：重度使用的网站且需求最完整功能</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="second">优点：无限添加站点,支持KSC歌词</span></td>
+                        </tr>
+						 <tr>
+                            <td><span>开放KSC歌词使用</span></td>
+                        </tr>
+						<tr>
+                            <td><span>多款精品皮肤免费使用</span></td>
+                        </tr>
+						 <tr>
+                            <td><span>可无限添加播放器授权站点</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>提供售后技术服务</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+<script>
+    layui.use(['admin', 'form','colorpicker'], function(){
+		$ = layui.jquery;
+        var element = layui.element,
+            colorpicker = layui.colorpicker,
+            form = layui.form;
+        element.render();
+        element.render('collapse');
+        form.render('radio');
+        form.render('select');
+        form.render('checkbox');
+		form.on('submit(pay)', function (data) {
+		shop = $("#shop").val();
+		paytype = $('input:radio[name="paytype"]:checked').val();
+		if(shop==''){
+			layer.msg('请选择购买类型', {icon: 5, time: 2000, shade: [0.3, '#000']});
+		}else{
+			jsonData = {
+				shop: shop,
+				paytype: paytype,
+			};
+			$.ajax({
+				url:"/PayAjax/shop",
+				data:jsonData,
+				type:"Post",
+				dataType:"json",
+				success:function(data){
+					if(data.code==0){
+						layer.msg('生成订单成功,正在跳转支付', {icon: 6, time: 2000, shade: [0.3, '#000']});
+						setTimeout(function () {
+							location.replace(data.url);
+						}, 1000);
+					}else{
+						layer.msg(data.msg, {icon: 5, time: 2000, shade: [0.3, '#000']});
+					}
+				}
+			});
+		}
+		});
+    });
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<?php /*a:1:{s:55:"D:\phpstudy_pro\project\auth\view\admin\users\list.html";i:1603539712;}*/ ?>
+  <div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+      <a lay-href="">控制面板</a>
+      <a><cite>用户列表</cite></a>
+    </div>
+  </div>
+  
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header">用户列表
+		  
+		  <span class="layuiadmin-badge" style="top: 9px;" lay-filter="layadmin-userfront-formlist"><input type="text" placeholder="输入用户名进行搜索" autocomplete="off" class="layui-input layui-input-search" type="text" id="username" name="username" style="
+    width: 150px;
+    background: #f2f2f2;
+    height: 22px;
+"> <a class="layui-btn layui-btn-xs" lay-submit lay-filter="LAY-user-front-search">搜索</a></span>
+		</div>
+          <div class="layui-card-body">
+            <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+            
+            <script type="text/html" id="test-table-operate-barDemo">
+              <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">管理</a>
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  layui.use(['admin', 'table'], function(){
+    var $ = layui.$
+  ,admin = layui.admin
+  ,view = layui.view
+  ,table = layui.table
+  ,form = layui.form;
+  
+    table.render({
+      elem: '#test-table-operate'
+      ,url: '/UserAjax/lists'
+      ,width: ''
+      ,height: 632
+      ,cols: [[
+        {field:'uid', width:70, title: 'UID', sort: true, align: 'center'}
+        ,{field:'username',title: '用户名'}
+        ,{field:'qq', title: '联系QQ'}
+        ,{field:'mail', title: '联系邮箱'}
+		,{field:'regtime', title: '注册时间'}
+        ,{title: '操作', align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+      ]]
+      ,page: true
+    });
+    
+    //监听工具条
+    table.on('tool(test-table-operate)', function(obj){
+      var data = obj.data;
+      if(obj.event === 'edit'){
+        setTimeout(function () {
+			location.replace('#/users/act/edit/uid/'+data.uid);
+		}, 1000);
+      }
+    });
+	//监听搜索
+  form.on('submit(LAY-user-front-search)', function(data){
+    var username = $('#username').val()
+    //执行重载
+    table.reload('test-table-operate', {
+	  url: '/UserAjax/lists'
+	  // ,methods:"post"
+	  ,request: {
+	   pageName: 'page' //页码的参数名称，默认：page
+	   ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+	  }
+	  ,where: {
+	   username : username
+	  }
+	  ,page: {
+	   curr: 1
+	  }
+	  });
+  });
+  });
+  </script>

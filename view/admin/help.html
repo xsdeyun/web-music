@@ -1,0 +1,103 @@
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">控制面板</a>
+    <a><cite>帮助文档</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+      
+        <div class="layui-card-header">帮助文档</div>
+        <div class="layui-card-body">
+          <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+              <h2 class="layui-colla-title">{:config('web.webname')}简介</h2>
+              <div class="layui-colla-content layui-show">
+                <p>{:config('web.webname')}基于梨花带雨开源音乐播放器,开发的后端控制面板<br>提供各种音乐接口以及管理操作,已兼容地球上所有语言程序的任何网站
+是基于QQ音乐、酷狗音乐、网易云音乐等歌曲ID全自动解析的Html5音乐播放器<br>
+注册登录后，新建播放器，新建歌单，将添加歌曲后的歌单添加给播放器，将播放器代码插入到需要添加音乐播放器的网页底部代码的&lt;/body&gt;之前即可。<br>欢迎加入 <a href="https://jq.qq.com/?_wv=1027&k=Zm7ngfjp" target="_blank" class="layui-btn layui-btn-xs layui-btn-normal" style="text-decoration: none;"><i class="layui-icon layui-icon-find-fill"></i> 官方Q群</a></p>
+              </div>
+            </div>
+			<div class="layui-colla-item">
+                <h2 class="layui-colla-title">能一直免费使用吗？<i class="layui-icon layui-colla-icon"></i></h2>
+                <div class="layui-colla-content">
+                    注册即可免费使用,长时间不登陆也不会回收账号<br>
+                    升级付费版后可以无限给自己的播放器添加授权站点,以各种专属功能的使用。
+                </div>
+            </div>
+			<div class="layui-colla-item">
+                <h2 class="layui-colla-title">怎么添加播放器？<i class="layui-icon layui-colla-icon"></i></h2>
+                <div class="layui-colla-content">
+                    每个播放器创建之后，都会有唯一的播放器ID和调用代码<br>
+                    当前版本不需要安装任何类型的插件，如有旧版本播放器插件，直接删除<br>
+                    添加播放器只需要把创建播放器后自动生成的播放器代码，添加到网页底部代码的&lt;/body&gt;之前<br>
+                    部分程序，比如Emlog可直接在设置 - 底部代码里添加播放器代码，或修改模板footer.php文件，将播放器代码添加到&lt;/body&gt;之前<br>
+                    其他程序可以此类推，如不理解，可视播放器代码为“网站统计代码”插入即可，或加入QQ群咨询
+                </div>
+            </div>
+			<div class="layui-colla-item">
+                <h2 class="layui-colla-title">什么是歌曲ID？歌单ID？网易用户ID？<i class="layui-icon layui-colla-icon"></i></h2>
+                <div class="layui-colla-content">
+                    网易音乐歌单选择：https://music.163.com/#/discover/playlist<br>
+                    网易音乐歌单ID演示：https://music.163.com/#/playlist?id=2819914042，则“2819914042”是网易音乐<b style="color:#f00">歌单</b>ID<br>
+                    网易音乐歌曲ID演示：https://music.163.com/#/song?id=1371568154，则“1371568154”是网易音乐<b style="color:#0c0">歌曲</b>ID<br>
+                    网易用户ID演示：https://music.163.com/#/user/home?id=68892465，则“68892465”是网易音乐<b style="color:#000">用户</b>ID<br><br>
+                    QQ音乐歌单选择：https://y.qq.com/portal/playlist.html<br>
+                    QQ音乐歌单ID演示：https://y.qq.com/n/yqq/playsquare/7039430895.html，则“7039430895”是QQ音乐<b style="color:#f00">歌单</b>ID<br>
+                    QQ音乐歌曲ID演示：https://y.qq.com/n/yqq/song/003Naz5p1bcB7h.html，则“003Naz5p1bcB7h”是QQ音乐<b style="color:#0c0">歌曲</b>ID<br><br>
+                    酷狗音乐歌单选择：https://www.kugou.com/yy/html/special.html<br>
+                    酷狗音乐歌单ID演示：https://www.kugou.com/yy/special/single/547134.html，则“547134”是酷狗音乐<b style="color:#f00">歌单</b>ID<br>
+                    酷狗音乐歌曲ID演示：https://www.kugou.com/song/#hash=C9BB65C7B3BB4764A257351763263E9D，则“C9BB65C7B3BB4764A257351763263E9D”是酷狗音乐<b style="color:#0c0">歌曲</b>ID<br><br>
+                    
+                    调用歌单直接输入歌单ID保存即可，保存后歌单不会显示任何歌曲，但播放器会正常加载<br>
+                    添加单曲可复制完整地址或歌曲ID，自动识别添加，或搜索歌曲添加<br>
+                    一般情况下，无需使用：<b>导入歌单</b>功能<br>
+                    调用歌单的基础上可额外自定义添加歌曲
+                </div>
+            </div>
+			<div class="layui-colla-item">
+                <h2 class="layui-colla-title">为什么添加播放器后有错位？<i class="layui-icon layui-colla-icon"></i></h2>
+                <div class="layui-colla-content">
+                    播放器理论已兼容地球上已知语言的任何类型网站，但难免有部分网站css语法不规范，导致网站css影响全局元素，从而使播放器错位或显示异常<br>
+                    如自身无法解决错位问题，请加入QQ群咨询群主解决
+                </div>
+            </div>
+			<div class="layui-colla-item">
+                <h2 class="layui-colla-title">代刷网：验证失败，请刷新页面重试<i class="layui-icon layui-colla-icon"></i></h2>
+                <div class="layui-colla-content">
+                    <p>代刷网使用播放器，需要在网站信息设置里面关闭：下单验证模块</p>
+                </div>
+            </div>
+			<div class="layui-colla-item">
+                <h2 class="layui-colla-title">KSC逐字变色歌词介绍<i class="layui-icon layui-colla-icon"></i></h2>
+                <div class="layui-colla-content">
+                    所有酷狗来源的歌曲均支持电脑端自动KSC歌词<br>
+                    其他KSC歌词由所有旗舰版用户编辑整理，并同步给所有播放器对应歌曲加载<br>
+                    非酷狗来源歌曲需要自己制作好歌词,并在自己站点根目录下创建xplayer目录,将对应的歌词以歌曲名.txt格式保存在目录下即可,不过此功能仅付费版用户使用。
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+layui.use(['admin'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,element = layui.element
+  ,router = layui.router();
+
+  element.render('collapse');
+  
+  //监听折叠
+  element.on('collapse(component-panel)', function(data){
+    layer.msg('展开状态：'+ data.show);
+  });
+});
+</script>

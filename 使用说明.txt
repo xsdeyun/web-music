@@ -1,0 +1,38 @@
+梨花带雨播放器3.9开源  
+官网:music.xingyaox.com
+QQ群:645631228
+
+源码0加密/无后门，发信不了，就是你没配置好发信信息
+
+环境:
+国内外服务器都可以用 
+主机无法运行 
+需求环境 php7.3+mysql5.6/5.7 推荐5.7, 
+设置public为运行目录，thinkphp伪静态
+
+安装: 
+导入根目录install.sql到数据库 
+配置config/database.php 数据库信息 
+配置extend/PHPMailer/SendEmail.php 注册发信信息 
+登录管理员账户 admin 123456 
+php中删除函数popen和proc_open （如果用户很多则不建议删除禁用，统计功能是个很鸡肋的功能，且会大量占用服务器资源）
+
+现在可以自己找回密码了
+
+用QQ发不了信的去extend/PHPMailer/SendEmail.php这里，
+在$mail -> SMTPAuth = true;//开启SMTP授权
+下面添加两行代码，就搞定了。 
+$mail -> SMTPSecure = "ssl"; //ssl加密 
+$mail -> Port = 465; //使用465端口
+
+接入其他易支付地址/view/admin/webset.html，第66行开始，复制一个，改成你的接口，改成你的名字，就好了
+
+如果出现 页面错误！请稍后再试～ ThinkPHP V6.0.3 { 十年磨一剑-为API开发设计的高性能框架 } - 官方手册  说明你没有正确的连接上数据库
+
+
+如果出现音乐不停地加载失败，你可以访问梨花带雨官网 music.xingyaox.com 看看我这边是否正常 
+如果我这边正常，那么就是你添加的音乐是版权音乐，或者授权域名写错了 ，经常有人非要在授权域名后面加个/
+
+转载请保留版权，梨花带雨程序版权属星耀所有
+星耀qq：2491000000
+

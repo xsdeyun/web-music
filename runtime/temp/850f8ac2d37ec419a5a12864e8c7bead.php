@@ -1,0 +1,124 @@
+<?php /*a:1:{s:49:"D:\phpstudy_pro\project\auth\view\user\login.html";i:1608971040;}*/ ?>
+
+<script type="text/html" template>
+  <link rel="stylesheet" href="{{ layui.setter.base }}style/login.css?v={{ layui.admin.v }}-1" media="all">
+</script>
+
+
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+
+  <div class="layadmin-user-login-main">
+    <div class="layadmin-user-login-box layadmin-user-login-header">
+      <h2><?php echo config('web.webname'); ?></h2>
+      <p><?php echo config('web.title'); ?></p>
+    </div>
+    <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+      <div class="layui-form-item">
+        <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+        <input type="text" name="username" id="username" lay-verify="required" placeholder="用户名" class="layui-input">
+      </div>
+      <div class="layui-form-item">
+        <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+        <input type="password" name="password" id="password" lay-verify="required" placeholder="密码" class="layui-input">
+      </div>
+      <div class="layui-form-item" style="margin-bottom: 20px;">
+        <input type="checkbox" name="remember" lay-skin="primary" title="记住密码" checked>
+      </div>
+      <div class="layui-form-item">
+        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+      </div>
+      <div class="layui-trans layui-form-item layadmin-user-login-other">
+        <label>社交账号登入</label>
+        <a href="/Admin/QqLogin"><i class="layui-icon layui-icon-login-qq"></i></a>
+        
+        <a lay-href="/user/act/reg" class="layadmin-user-jump-change layadmin-link">注册账号</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-trans layadmin-user-login-footer">
+    
+    <p>© 2020 <a href="https://music.xingyaox.com/" target="_blank">music.xingyaox.com</a></p>
+    <p>
+      <span><a lay-href="/user/act/reg">注册</a></span>
+      <span><a lay-href="/user/act/find">找回密码</a></span>
+      <span><a href="/" target="_blank">首页</a></span>
+    </p>
+  </div>
+  
+</div>
+<script src="/static/gt.js"></script>
+<script>
+layui.use(['jquery','admin', 'form', 'user'], function(){
+	var $ = layui.$
+	,setter = layui.setter
+	,admin = layui.admin
+	,form = layui.form
+	,router = layui.router()
+	,search = router.search;
+
+	form.render();
+	var handler = function (captchaObj) {
+		captchaObj.onReady(function () {
+		}).onSuccess(function () {
+			var username, password;
+			user = $('#username').val();
+			pass = $('#password').val();
+			var result = captchaObj.getValidate();
+			var result_data = {
+				geetest_challenge: result.geetest_challenge,
+				geetest_validate: result.geetest_validate,
+				geetest_seccode: result.geetest_seccode,
+				username: user,
+				password: pass,
+				token: (new Date()).getTime()
+			};
+			$.ajax({
+				url:"/LoginAjax/login",
+				data:result_data,
+				type:"Post",
+				dataType:"json",
+				success:function(data){
+					if (data.code === 0) {
+						if (result) {
+							layer.msg('登入成功', {
+							  offset: '15px'
+							  ,icon: 1
+							  ,time: 1000
+							}, function(){
+							  location.hash = search.redirect ? decodeURIComponent(search.redirect) : '/';
+							});
+						} else {
+							layer.msg('请先完成验证');
+						}
+					} else {
+						layer.msg(data.msg);
+						captchaObj.reset();
+					}
+				}
+			});
+		});
+		form.on('submit(LAY-user-login-submit)', function(obj){
+			captchaObj.verify();
+		});
+	};
+	
+	$.ajax({
+		url:"<?php echo url('Common/Geetest_captcha'); ?>?t=" + (new Date()).getTime(),
+		data:undefined,
+		type:"Post",
+		dataType:"json",
+		success:function(data){
+			initGeetest({
+                gt: data.gt,
+                challenge: data.challenge,
+                offline: !data.success, // 表示用户后台检测极验服务器是否宕机
+                new_captcha: data.new_captcha, // 用于宕机时表示是新验证码的宕机
+                product: "bind", // 产品形式，包括：float，popup
+                width: "190px",
+                https: false
+            }, handler);
+		}
+	});
+});
+</script>
