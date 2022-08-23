@@ -41,9 +41,6 @@ apache
 - 文曲兰 <https://www.wenqulan.com/>
 - 梨花带雨播放器 <https://music.m0x.cn/>
 
-#### 赞赏
-![赞赏](https://images.gitee.com/uploads/images/2020/1024/154537_900e191f_2143538.jpeg "43c81787c3defea75044fb63b58bb6a.jpg")
-
 #### 版权信息
 ThinkPHP遵循MIT开源协议发布，并提供免费使用。
 
